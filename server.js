@@ -4,7 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 // Connect to MongoDB using environment variables
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('Successfully connected to MongoDB Atlas!');
   })
@@ -40,6 +40,27 @@ app.post('/api/interactions', (req, res) => {
     .catch(err => {
       console.error('Error logging interaction:', err);
       res.status(500).send('Error logging interaction');
+    });
+});
+
+// Define GET endpoint to retrieve all interactions
+app.get('/api/interactions', (req, res) => {
+  Interaction.find()
+    .then(interactions => res.status(200).json(interactions))
+    .catch(err => {
+      console.error('Error retrieving interactions:', err);
+      res.status(500).send('Error retrieving interactions');
+    });
+});
+
+// Define GET endpoint to retrieve interactions by type
+app.get('/api/interactions/:type', (req, res) => {
+  const interactionType = req.params.type;
+  Interaction.find({ interactionType: interactionType })
+    .then(interactions => res.status(200).json(interactions))
+    .catch(err => {
+      console.error(`Error retrieving interactions of type ${interactionType}:`, err);
+      res.status(500).send('Error retrieving interactions');
     });
 });
 
