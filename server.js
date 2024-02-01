@@ -1,11 +1,16 @@
+require('dotenv').config();
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-// Connect to MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/vrInteractions', { useNewUrlParser: true, useUnifiedTopology: true });
-
+// Connect to MongoDB using environment variables
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('Successfully connected to MongoDB Atlas!');
+  })
+  .catch((error) => {
+    console.error('Error connecting to MongoDB Atlas:', error);
+  });
 
 // Define a schema for your interactions
 const interactionSchema = new mongoose.Schema({
@@ -20,18 +25,22 @@ const Interaction = mongoose.model('Interaction', interactionSchema);
 
 // Initialize Express app
 const app = express();
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(cors());
 
 // Define POST endpoint to handle interactions
 app.post('/api/interactions', (req, res) => {
   const interactionData = req.body;
+  // Add validation for interactionData here
   const interaction = new Interaction(interactionData);
 
   // Save interaction to the database
   interaction.save()
     .then(() => res.status(200).send('Interaction logged'))
-    .catch(err => res.status(500).send('Error logging interaction: ' + err));
+    .catch(err => {
+      console.error('Error logging interaction:', err);
+      res.status(500).send('Error logging interaction');
+    });
 });
 
 // Start the server
