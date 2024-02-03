@@ -34,7 +34,7 @@ app.post('/api/interactions', (req, res) => {
   // Add validation for interactionData here
   const interaction = new Interaction(interactionData);
 
-  // Save interaction to the database
+  
   interaction.save()
     .then(() => res.status(200).send('Interaction logged'))
     .catch(err => {
