@@ -43,7 +43,7 @@ app.post('/api/interactions', (req, res) => {
     });
 });
 
-// Define GET endpoint to retrieve all interactions
+
 app.get('/api/interactions', (req, res) => {
   Interaction.find()
     .then(interactions => res.status(200).json(interactions))
