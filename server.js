@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-// Connect to MongoDB using environment variables
+
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('Successfully connected to MongoDB Atlas!');
