@@ -53,7 +53,7 @@ app.get('/api/interactions', (req, res) => {
     });
 });
 
-// Define GET endpoint to retrieve interactions by type
+
 app.get('/api/interactions/:type', (req, res) => {
   const interactionType = req.params.type;
   Interaction.find({ interactionType: interactionType })
