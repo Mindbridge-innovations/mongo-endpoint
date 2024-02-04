@@ -17,7 +17,7 @@ const interactionSchema = new mongoose.Schema({
   objectName: String,
   interactionType: String,
   timestamp: Date,
-  
+  // Add other fields as necessary
 });
 
 // Create a model based on the schema
