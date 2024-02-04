@@ -12,12 +12,12 @@ mongoose.connect(process.env.MONGODB_URI)
     console.error('Error connecting to MongoDB Atlas:', error);
   });
 
-// Define a schema for your interactions
+
 const interactionSchema = new mongoose.Schema({
   objectName: String,
   interactionType: String,
   timestamp: Date,
-  // Add other fields as necessary
+  
 });
 
 // Create a model based on the schema
