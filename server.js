@@ -23,7 +23,7 @@ const interactionSchema = new mongoose.Schema({
 // Create a model based on the schema
 const Interaction = mongoose.model('Interaction', interactionSchema);
 
-// Initialize Express app
+// Initialize Express 
 const app = express();
 app.use(express.json());
 app.use(cors());
