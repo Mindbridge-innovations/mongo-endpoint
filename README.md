@@ -1,2 +1,2 @@
 # mongo-endpoint
-MongoDB Endpoint
+MongoDB Endpoint for VR Headset
